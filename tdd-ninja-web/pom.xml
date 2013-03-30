@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.blogspot.javapeanuts.tdd-ninja</groupId>
@@ -13,4 +14,57 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<artifactId>tdd-ninja-parent</artifactId>
 	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>1.2.0.0</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<jsSrcDir>src/main/webapp/javascript</jsSrcDir>
+					<sourceIncludes>
+						<include>**/*.js</include>
+					</sourceIncludes>
+					<jsTestSrcDir>src/test/webapp/javascript</jsTestSrcDir>
+					<specIncludes>
+						<include>**/*Test.js</include>
+						<include>**/*-test.js</include>
+					</specIncludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.timurstrekalov</groupId>
+				<artifactId>saga-maven-plugin</artifactId>
+				<version>1.3.0</version>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>coverage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<baseDir>${project.build.directory}/jasmine</baseDir>
+					<includes>
+						SpecRunner.html
+					</includes>
+					<noInstrumentPatterns>
+						<pattern>.+/src/main/webapp/javascript/lib/.+\.js</pattern>
+					</noInstrumentPatterns>
+					<outputDir>${project.build.directory}/coverage</outputDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
