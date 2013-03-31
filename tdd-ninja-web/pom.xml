@@ -33,6 +33,7 @@
 				<configuration>
 					<jsSrcDir>src/main/webapp/javascript</jsSrcDir>
 					<sourceIncludes>
+						<include>tdd-ninja.js</include>
 						<include>**/*.js</include>
 					</sourceIncludes>
 					<jsTestSrcDir>src/test/webapp/javascript</jsTestSrcDir>
